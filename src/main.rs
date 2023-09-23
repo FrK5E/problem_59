@@ -43,6 +43,15 @@ fn detect_english(data: &Vec<u8>) -> bool {
     return false;
 }
 
+fn get_sum( data: &Vec<u8> ) -> u128 { 
+    let mut result = 0u128;
+    for d in data { 
+        result += *d as u128;
+    }
+    return result;
+}
+
+
 fn main() {
     let contents =
         fs::read_to_string("0059_cipher.txt").expect("Should have been able to read the file");
@@ -62,6 +71,8 @@ fn main() {
                 apply_key(&mut data, &key);
                 if detect_english(&data) {
                     println!("Heureka ");
+                    let temp = get_sum(&data);
+                    println!( "sum : {temp}");
                     return;
                 }
                 counter +=1;
